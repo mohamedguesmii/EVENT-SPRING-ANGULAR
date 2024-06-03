@@ -1,0 +1,263 @@
+<div class="container">
+  <h1>Réservations</h1>
+
+  <!-- Notification -->
+  <div *ngIf="isModified" class="notification">Formulaire modifié</div>
+
+  <!-- Bouton pour envoyer un e-mail de réservation -->
+  <button class="btn btn-primary" (click)="sendEmail(selectedReservation)" *ngIf="selectedReservation">Envoyer un e-mail</button>
+
+  <!-- Bouton pour ouvrir le formulaire d'ajout de réservation -->
+  <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#ajouterReservationModal">Ajouter Réservation</button>
+
+  <!-- Modal pour le formulaire d'ajout de réservation -->
+  <div class="modal fade" id="ajouterReservationModal" tabindex="-1" role="dialog" aria-labelledby="ajouterReservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ajouterReservationModalLabel">Ajouter Réservation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="reservationForm" (ngSubmit)="addReservation()" class="form">
+          <div class="modal-body">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="nomreserv">Nom du réservateur</label>
+                <input type="text" formControlName="nomreserv" class="form-control" id="nomreserv" placeholder="Entrez le nom du réservateur" required>
+                <div *ngIf="reservationForm.get('nomreserv').invalid && (reservationForm.get('nomreserv').dirty || reservationForm.get('nomreserv').touched)" class="text-danger">
+                  Le nom du réservateur est requis
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="nbrplace">Nombre de places</label>
+                <input type="number" formControlName="nbrplace" class="form-control" id="nbrplace" placeholder="Entrez le nombre de places" required>
+                <div *ngIf="reservationForm.get('nbrplace').invalid && (reservationForm.get('nbrplace').dirty || reservationForm.get('nbrplace').touched)" class="text-danger">
+                  Le nombre de places est requis
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="type">Type</label>
+                <select formControlName="type" class="form-control" id="type" required>
+                  <option value="">Choisissez le type</option>
+                  <option value="vip">VIP</option>
+                  <option value="normal">Normal</option>
+                  <option value="etudiant">Étudiant</option>
+                </select>
+                <div *ngIf="reservationForm.get('type').invalid && (reservationForm.get('type').dirty || reservationForm.get('type').touched)" class="text-danger">
+                  Le type est requis
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="description">Description</label>
+                <textarea formControlName="description" class="form-control" id="description" placeholder="Entrez la description" required></textarea>
+                <div *ngIf="reservationForm.get('description').invalid && (reservationForm.get('description').dirty || reservationForm.get('description').touched)" class="text-danger">
+                  La description est requise
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="datereserv">Date de réservation</label>
+              <input type="date" formControlName="datereserv" class="form-control" id="datereserv" required>
+              <div *ngIf="reservationForm.get('datereserv').invalid && (reservationForm.get('datereserv').dirty || reservationForm.get('datereserv').touched)" class="text-danger">
+                La date de réservation est requise
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tableau pour afficher les réservations -->
+  <table class="table mt-4">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nom du réservateur</th>
+        <th>Nombre de places</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Date de réservation</th>
+        <th>Nom evenement</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ reservation.nomreserv }}</td>
+        <td>{{ reservation.nbrplace }}</td>
+        <td>{{ reservation.type }}</td>
+        <td>{{ reservation.description }}</td>
+        <td>{{ reservation.datereserv | date }}</td>
+        <td>{{ reservation.nomevenement | date }}</td>
+        <td>
+          <button class="btn btn-success btn-sm mr-1" (click)="toggleStatus(reservation)">Activer</button>
+          <button class="btn btn-danger btn-sm" (click)="toggleStatus(reservation)">Désactiver</button>
+        </td>
+        
+        
+        <td>
+          <button class="btn btn-info btn-sm mr-1" (click)="selectReservation(reservation)">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-danger btn-sm mr-1" (click)="deleteReservation(reservation.idreserv)">
+            <i class="fa fa-trash"></i>
+          </button>
+          <button class="btn btn-primary btn-sm" (click)="updateReservation()">
+            <i class="fa fa-refresh"></i>
+          </button>
+         <!-- Votre bouton existant -->
+         <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#email"> <i class="fa fa-envelope"></i></button>
+   
+
+<!-- Code HTML du formulaire de mailing (ajouté à votre page) -->
+<div id="mailingForm" style="display: none;">
+  <!-- Votre formulaire de mailing ici -->
+  <!-- Assurez-vous d'ajouter les champs nécessaires pour l'envoi d'un email -->
+</div>
+
+<script>
+  // Récupération du bouton et du formulaire de mailing
+  var mailingButton = document.getElementById('mailingButton');
+  var mailingForm = document.getElementById('mailingForm');
+
+  // Ajout d'un écouteur d'événements sur le clic du bouton
+  mailingButton.addEventListener('click', function() {
+    // Si le formulaire de mailing est déjà visible, le masquer
+    if (mailingForm.style.display === 'block') {
+      mailingForm.style.display = 'none';
+    } else {
+      // Sinon, afficher le formulaire de mailing
+      mailingForm.style.display = 'block';
+    }
+  });
+</script>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Section des statistiques -->
+  <div class="mt-4">
+    <h2>Statistiques</h2>
+    <canvas #chartCanvas></canvas>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="email" tabindex="-1" role="dialog" aria-labelledby="ajouterReservationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+  <title>Email Composition</title>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <!-- Inbox Menu and Contacts -->
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <ul class="list-group mt-3">
+            <!-- Other menu items -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-body">
+          <ul class="list-group mt-3">
+            <!-- Other contacts -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email Composition -->
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">New Message</h5>
+          <form (ngSubmit)="sendEmail()">
+            <div class="form-group row">
+              <div class="form-group">
+<!-- Champ "À" avec label horizontal -->
+<div class="form-group row">
+  <label for="to" class="col-sm-3 col-form-label">Email:</label>
+  <div class="col-sm-9">
+    <input type="email" class="form-control" id="to" placeholder="Enter email" [(ngModel)]="emailRequest.to" name="to" required>
+  </div>
+</div>
+                <div class="col-sm-11">
+                  <input type="email" class="form-control" id="to" placeholder="Type email" [(ngModel)]="emailRequest.to" name="to" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cc" class="col-sm-3 col-form-label">Send  :</label>
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="cc" placeholder="Type email" [(ngModel)]="emailRequest.subject" name="cc">
+                </div>
+              </div>
+              
+            </div>
+            <!-- Other form fields -->
+
+            <div class="btn-toolbar" role="toolbar">
+              <!-- Buttons for formatting -->
+            </div>
+
+           
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Send</button>
+              <button type="submit" class="btn btn-secondary">Draft</button>
+              <button type="submit" class="btn btn-danger">Discard</button>
+            </div>
+          </form>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+
+</html>
+
+    </div>
+  </div>
+</div>

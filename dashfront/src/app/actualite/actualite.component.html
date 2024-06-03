@@ -1,0 +1,102 @@
+<style>
+    .title {
+        text-align: center;
+        font-weight: bold;
+        color: #000080; /* bleu foncé */
+        font-size: 30px; /* taille de police plus grande */
+        animation: fadeIn 1s ease-out;
+    }
+
+    .animated-table {
+        animation: slideInLeft 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0); }
+    }
+</style>
+
+<div>
+
+    <br><br><br>
+    <h2 class="title" style="font-size: 45px; transition: transform 0.3s ease;">Ajouter Evenement</h2>
+    <form>
+        <!-- Notification -->
+<div *ngIf="notificationMessage" class="alert alert-success alert-dismissible fade show notification" role="alert">
+    {{ notificationMessage }}
+    <button type="button" class="close" aria-label="Close" (click)="notificationMessage = ''">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+        <div>
+            <label>Images</label>
+            <input type="file"  (change)="fileuploded($event)">
+            <label for="eventSelect">Événement</label>
+    <select id="eventSelect" required [(ngModel)]="actuality">
+        <option value="" disabled selected>Choisissez un événement</option>
+        <option value="Conférences et séminaires">Conférences et séminaires</option>
+        <option value="Tables rondes et panels de discussion">Tables rondes et panels de discussion</option>
+        <option value="Networking et rencontres B2B">Networking et rencontres B2B</option>
+        <option value="Salons et expositions commerciales">Salons et expositions commerciales</option>
+        <option value="Ateliers et sessions de formation">Ateliers et sessions de formation</option>
+        <option value="Pitch sessions et concours d'entrepreneuriat">Pitch sessions et concours d'entrepreneuriat</option>
+        <option value="Activités de team-building">Activités de team-building</option>
+    </select>
+        </div>
+        <div>
+            <button (click)="onSubmit()">Ajouter Evenement</button>
+        </div>
+    </form>
+
+ <!-- Notification d'ajout d'événement -->
+ <div *ngIf="showNotification" class="alert alert-success alert-dismissible fade show" role="alert">
+    Événement ajouté avec succès!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="showNotification = false">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+    <div class="main-content">
+            <div class="row">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title mt-0 title animated-table" style="font-weight: bold; color: #0000FF; animation: pulse 1s infinite;">TABLEAU DES EVENEMENT</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover animated-table">
+                                    <thead class="">
+                                        <th><b>Evenements</b></th>
+                                        <th><b>Date publication</b></th>
+                                        <th><b>Images Evenement</b></th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let act of actualites">
+                                            <td>{{act?.actuality}}</td>
+                                            <td>{{act?.datePub}}</td>
+                                            <td *ngIf="!act?.imageUrl"></td>
+                                            <td><img style="width: 100px;height: 100px" [src]="act.imageUrl"></td>
+                                            <td>
+                                                <button  class="btn btn-primary btn-sm"(click)="update(act?.idActualite)">Modifier Evenement</button>
+                                                <i class="fa fa-refresh"></i>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm mr-1" (click)="delete(act?.idActualite)">Supprimer Evenement</button>
+                                                <i class="fa fa-trash"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+   

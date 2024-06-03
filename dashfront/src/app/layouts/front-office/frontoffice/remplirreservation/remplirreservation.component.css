@@ -1,0 +1,193 @@
+.animated-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.animated-title {
+  color: #007bff;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold; /* Ajout du style en gras */
+  animation: fadeInTitle 1s ease; /* Animation du titre */
+}
+
+@keyframes fadeInTitle {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.custom-select {
+  position: relative;
+}
+
+.custom-select select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  appearance: none;
+}
+
+.custom-select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Animation du titre */
+@keyframes grow-and-fade-in {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* Animation du titre */
+@keyframes grow-and-fade-in {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Style pour le titre */
+.animated-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: blue; /* Couleur bleue pour le titre */
+  animation: grow-and-fade-in 0.5s ease-in-out;
+}
+
+
+/* Style pour le titre */
+.animated-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: blue; /* Couleur bleue pour le titre */
+  animation: grow-and-fade-in 0.5s ease-in-out;
+}
+
+/* Styles pour le formulaire */
+.animated-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.error-message {
+  color: red;
+  margin-top: 4px;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}

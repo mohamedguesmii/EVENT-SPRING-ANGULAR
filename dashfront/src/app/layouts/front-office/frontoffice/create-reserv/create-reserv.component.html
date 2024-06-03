@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="card col-md-6 offset-md-3 offset-md-3">
+      <div class="row">
+        <h3 class="text-center">Ajouter un reservation</h3>
+        <hr />
+        <div class="card-body">
+          <form [formGroup]="reservForm" (ngSubmit)="onSubmit()" novalidate #form="ngForm" >
+            <div class="form-group">
+                <label for="nomreserv">Nom de la réservation:</label>
+                <input type="text" id="nomreserv" formControlName="nomreserv" class="form-control">
+                <div *ngIf="reservationForm.get('nomreserv').invalid && reservationForm.get('nomreserv').touched" class="error-message">
+                  <span *ngIf="reservationForm.get('nomreserv').errors.required">Ce champ est requis.</span>
+                </div>
+              </div>
+            
+              <div class="form-group">
+                <label for="nbrplace">Nombre de places:</label>
+                <input type="number" id="nbrplace" formControlName="nbrplace" class="form-control">
+                <div *ngIf="reservationForm.get('nbrplace').invalid && reservationForm.get('nbrplace').touched" class="error-message">
+                  <span *ngIf="reservationForm.get('nbrplace').errors.min">Le nombre de places doit être supérieur ou égal à 1.</span>
+                </div>
+              </div>
+            
+              <div class="form-group">
+                <label for="type">Type de réservation:</label>
+                <input type="text" id="type" formControlName="type" class="form-control">
+                <div *ngIf="reservationForm.get('type').invalid && reservationForm.get('type').touched" class="error-message">
+                  <span *ngIf="reservationForm.get('type').errors.required">Ce champ est requis.</span>
+                </div>
+              </div>
+            
+              <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" formControlName="description" class="form-control"></textarea>
+              </div>
+            
+              <div class="form-group">
+                <label for="datereserv">Date de réservation:</label>
+                <input type="date" id="datereserv" formControlName="datereserv" class="form-control">
+                <div *ngIf="reservationForm.get('datereserv').invalid && reservationForm.get('datereserv').touched" class="error-message">
+                  <span *ngIf="reservationForm.get('datereserv').errors.required">Ce champ est requis.</span>
+                </div>
+              </div>
+            <!--div class="form-group">
+              <label for="image">Image:</label>
+             <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*">
+            </div-->
+            <br />
+            <button type="submit" (click)="reserve()">reserver un evenement</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>

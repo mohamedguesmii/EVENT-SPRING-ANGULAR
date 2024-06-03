@@ -1,0 +1,241 @@
+
+/* Styles pour la colonne active */
+.active-column {
+  background-color: #28a745; /* Vert */
+  color: #fff; /* Texte blanc */
+}
+
+/* Styles pour la colonne inactive */
+.inactive-column {
+  background-color: #dc3545; /* Rouge */
+  color: #fff; /* Texte blanc */
+}
+
+
+/* Styles pour les boutons d'action */
+.btn-toggle {
+  margin-right: 5px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+
+/* Style for the container */
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+  }
+  
+  /* Style for the form */
+  .form {
+    margin-bottom: 20px;
+  }
+  
+  /* Style for the form controls */
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  /* Style for the error messages */
+  .text-danger {
+    color: #dc3545;
+    font-size: 14px;
+  }
+  
+  /* Style for the table */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Style for the table headings */
+  .table th {
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  /* Style for the table rows */
+  .table td {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  /* Style for the buttons */
+  .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Style for the primary button */
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Style for the secondary button */
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  /* Style for the danger button */
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  /* Style for the info button */
+  .btn-info {
+    background-color: #17a2b8;
+    color: #fff;
+  }
+  
+  /* Style for the success button */
+  .btn-success {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  
+  /* Animation pour le titre */
+  @keyframes zoomTitle {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Style pour le titre "Evenements" */
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: zoomTitle 2s infinite; /* Appliquer l'animation en boucle infinie */
+  }
+  
+  /* Style for the warning button */
+  .btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+  
+  /* Style for the outline buttons on hover */
+  .btn:hover {
+    opacity: 0.8;
+  }
+  
+  /* Style for the margin between buttons */
+  .btn-group {
+    margin-right: 10px;
+  }
+  
+  /* CSS for the add event form */
+  .add-event-form {
+    display: none;
+  }
+  
+  .add-event-form.show {
+    display: block;
+  }
+  
+  .container, .container * {
+    color: black
+  }
+  
+  
+  /* Style pour le titre "Evenements" */
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: zoomTitle 2s infinite; /* Appliquer l'animation en boucle infinie */
+    font-weight: bold; /* Mettre en gras */
+    color: red; /* Couleur rouge */
+  }
+  
+  /* Style pour la table */
+  .table {
+  border-collapse: collapse;
+  width: 100%;
+  }
+  
+  /* Style pour les cellules de tableau */
+  .table td,
+  .table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  /* Animation au survol des cellules */
+  .table td:hover,
+  .table th:hover {
+  background-color: #166471;
+  transform: scale(1.1); /* Zoom sur la cellule */
+  }
+  /* Style pour les cellules des colonnes avec animation et couleur */
+  .animated-column {
+  background-color: #cccccc; /* Couleur de fond gris initial */
+  transition: background-color 0.3s ease; /* Transition de couleur de fond sur 0.3s */
+  }
+  
+  /* Style pour les colonnes du tableau lorsqu'elles sont survolées */
+  .animated-column:hover {
+  background-color: #00c9e4; /* Couleur de fond bleu clair au survol */
+  }
+  /* Style pour rendre le texte du tableau en gras et animé */
+  .table td, .table th {
+  font-weight: bold; /* Texte en gras */
+  animation: fadeIn 1s ease-in-out; /* Animation fadeIn */
+  }
+  
+  /* Animation fadeIn */
+  @keyframes fadeIn {
+  from {
+      opacity: 0; /* Opacité initiale à 0 */
+  }
+  to {
+      opacity: 1; /* Opacité finale à 1 */
+  }
+  }
+  
+  /* Styles pour le statut "acceptée" */
+.text-success {
+  color: green;
+}
+
+/* Styles pour le statut "annulée" */
+.text-danger {
+  color: red;
+}

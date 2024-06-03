@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des tickets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease; /* Ajout de l'animation au conteneur */
+        }
+
+        .title {
+            text-align: center;
+            color: #007bff; /* Changement de la couleur du titre en bleu */
+            animation: slideIn 1s ease; /* Ajout de l'animation au titre */
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .ticket-table {
+            width: 100%;
+            border-collapse: collapse;
+            animation: fadeIn 1s ease; /* Ajout de l'animation au tableau */
+        }
+
+        .ticket-table th, .ticket-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .ticket-row:hover {
+            background-color: #f2f2f2;
+        }
+
+        .export__file {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .export__file button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .export__file button:hover {
+            background-color: #45a049;
+        }
+
+        .reserve-button {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .reserve-button:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Liste des tickets</h1>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" (keyup)="searchFunction()" placeholder="Rechercher des tickets...">
+        </div>
+
+        <table id="ticketTable" class="ticket-table">
+            <thead>
+                <tr>
+                    <th (click)="sortTable('nbrticket')"> <strong>Nombre de tickets</strong></th>
+                    <th (click)="sortTable('type')"> <strong>Type</strong></th>
+                    <th (click)="sortTable('prix')"> <strong>Prix</strong></th>
+                    <th (click)="sortTable('description')"> <strong>Evenement</strong></th>
+                    <th (click)="sortTable('numero')"> <strong>Numéro</strong></th>
+                    <th (click)="sortTable('datevente')"> <strong>Date de vente</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ticket of tickets" class="ticket-row">
+                    <td class="ticket-cell">{{ ticket.nbrticket }}</td>
+                    <td class="ticket-cell">{{ ticket.type }}</td>
+                    <td class="ticket-cell">{{ ticket.prix }}</td>
+                    <td class="ticket-cell">{{ ticket.description }}</td>
+                    <td class="ticket-cell">{{ ticket.numero }}</td>
+                    <td class="ticket-cell">{{ ticket.datevente }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="export__file">
+            <button (click)="exportToCSV()">Export to CSV</button>
+        </div>
+
+        <a [routerLink]="'/reservation'" class="reserve-button">Réserver ticket</a>
+    </div>
+</body>
+</html>

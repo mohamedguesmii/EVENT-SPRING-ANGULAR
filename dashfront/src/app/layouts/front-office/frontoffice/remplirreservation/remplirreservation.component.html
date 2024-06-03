@@ -1,0 +1,68 @@
+<form [formGroup]="reservationForm" (ngSubmit)="addReservation()" class="animated-form">
+  <div class="title-container">
+    <h2 class="animated-title">Réservation d'événement</h2>
+  </div>
+
+  <div class="form-group animated-input">
+    <label for="nomreserv">Nom de la réservation:</label>
+    <input type="text" id="nomreserv" formControlName="nomreserv" class="form-control form-input" required>
+    <div *ngIf="reservationForm.get('nomreserv').invalid && reservationForm.get('nomreserv').touched" class="error-message">
+      <span *ngIf="reservationForm.get('nomreserv').errors.required">Ce champ est requis.</span>
+    </div>
+  </div>
+
+  <div class="form-group animated-input">
+    <label for="nbrplace">Nombre de places:</label>
+    <input type="number" id="nbrplace" formControlName="nbrplace" class="form-control form-input" min="1" required>
+    <div *ngIf="reservationForm.get('nbrplace').invalid && reservationForm.get('nbrplace').touched" class="error-message">
+      <span *ngIf="reservationForm.get('nbrplace').errors.min">Le nombre de places doit être supérieur ou égal à 1.</span>
+    </div>
+  </div>
+
+  <!-- Utilisation d'un sélecteur personnalisé -->
+  <div class="form-group animated-input">
+    <label for="type">Type de réservation:</label>
+    <div class="custom-select">
+      <select id="type" formControlName="type" class="form-control form-input" required>
+        <option value="" disabled selected></option>
+        <option value="VIP">VIP</option>
+        <option value="Étudiant">Étudiant</option>
+        <option value="Normal">Normal</option>
+      </select>
+    </div>
+    <div *ngIf="reservationForm.get('type').invalid && reservationForm.get('type').touched" class="error-message">
+      <span *ngIf="reservationForm.get('type').errors.required">Ce champ est requis.</span>
+    </div>
+  </div>
+
+  <div class="form-group animated-input">
+    <label for="event">Événement:</label>
+    <select id="event" formControlName="event" class="form-control form-input">
+      <option value="">Sélectionnez un événement</option>
+      <option value="Networking et rencontres B2B">Networking et rencontres B2B</option>
+      <option value="Activités de team-building">Activités de team-building</option>
+      <option value="Pitch sessions et concours d'entrepreneuriat">Pitch sessions et concours d'entrepreneuriat</option>
+      <option value="Conférences et séminaires">Conférences et séminaires</option>
+      <option value="Tables rondes et panels de discussion">Tables rondes et panels de discussion</option>
+      <option value="Salons et expositions commerciales">Salons et expositions commerciales</option>
+    </select>
+  </div>
+  
+  <div class="form-group animated-input">
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description" class="form-control form-input" rows="5"></textarea>
+  </div>
+  
+  
+
+  <div class="form-group animated-input">
+    <label for="datereserv">Date de réservation:</label>
+    <input type="date" id="datereserv" formControlName="datereserv" class="form-control form-input" required>
+    <div *ngIf="reservationForm.get('datereserv').invalid && reservationForm.get('datereserv').touched" class="error-message">
+      <span *ngIf="reservationForm.get('datereserv').errors.required">Ce champ est requis.</span>
+    </div>
+  </div>
+  
+
+  <button type="submit" [disabled]="!reservationForm.valid" class="submit-button">Remplir le formulaire reservation </button>
+</form>
